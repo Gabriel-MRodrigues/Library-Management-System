@@ -32,5 +32,39 @@ namespace LMS_Project
             Console.WriteLine($"Department: {Department}");
             base.DisplayDetails();
         }
+        public void AssignBook(Student student, string bookTitle)
+        {
+            if (student == null)
+            {
+                Console.WriteLine("Invalid Student");
+                return;
+            }
+            if (!string.IsNullOrEmpty(bookTitle))
+            {
+                if (!student.BooksBorrowed.Contains(bookTitle))
+                {
+                    if (student.BooksBorrowed.Count <= 3)
+                    {
+                        student.BorrowBook(bookTitle);
+                        Console.WriteLine($"{Name} (Faculty) from deparment {Department} assigned the book '{bookTitle}' to {student.Name} (Student)");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{student.Name} cannot borrow more books. Limit reached..");
+                        return;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"{student.Name} already has the book: {bookTitle}");
+                    return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Book title cannot be empty");
+                return;
+            }
+        }
     }
 }
