@@ -15,5 +15,22 @@ namespace LMS_Project
         {
             this.Department = Department;
         }
+        public override void BorrowBook(string bookTitle)
+        {
+            if (BooksBorrowed.Count <= 5)
+            {
+                base.BorrowBook(bookTitle);
+            }
+            else
+            {
+                Console.WriteLine($"{Name} as a Faculty Member can only borrow up to 5 books.");
+            }
+        }
+
+        public override void DisplayDetails()
+        {
+            Console.WriteLine($"Department: {Department}");
+            base.DisplayDetails();
+        }
     }
 }
