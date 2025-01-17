@@ -10,6 +10,8 @@ namespace LMS_Project
     {
         static void Main(string[] args)
         {
+            List<LibraryMember> libraryMembers = new List<LibraryMember>();
+
             void askQuestions()
             {
                 Console.WriteLine("\n1. Add New Member.");
@@ -44,6 +46,24 @@ namespace LMS_Project
                         Console.WriteLine("Invalid enter. Try again...");
                         break;
                 }
+            }
+        }
+        static void AddNewMember(List<LibraryMember> libraryMembers)
+        {
+            Console.WriteLine("1. Student Member");
+            Console.WriteLine("2. Faculty Member");
+            string option = Console.ReadLine();
+
+            switch (option)
+            {
+                case "1":
+                    break;
+                case "2":
+                    break;
+                default:
+                    Console.WriteLine("Invalid enter. Press enter to try again.");
+                    Console.ReadLine();
+                    break;
             }
         }
     }
