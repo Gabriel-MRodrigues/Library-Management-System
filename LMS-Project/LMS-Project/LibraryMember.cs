@@ -37,5 +37,36 @@ namespace LMS_Project
                 Console.WriteLine($"{Name} already has book: {bookTitle}");
             }
         }
+
+        public void ReturnBook(string bookTitle)
+        {
+            if (BooksBorrowed.Contains(bookTitle))
+            {
+                BooksBorrowed.Remove(bookTitle);
+                Console.WriteLine($"{Name} returned the book: {bookTitle}");
+            }
+            else
+            {
+                Console.WriteLine($"{Name} has not borrowed the book: {bookTitle}.");
+            }
+        }
+
+        public virtual void DisplayDetails()
+        {
+            Console.WriteLine($"Member ID: {MemberID}");
+            Console.WriteLine($"Name: {Name}");
+            Console.WriteLine("Books Borrowed: ");
+            if (BooksBorrowed.Count == 0)
+            {
+                Console.WriteLine("None");
+            }
+            else
+            {
+                foreach (string book in BooksBorrowed)
+                {
+                    Console.WriteLine($"- {book}");
+                }
+            }
+        }
     }
 }
