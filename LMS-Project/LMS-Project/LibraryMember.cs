@@ -19,5 +19,23 @@ namespace LMS_Project
             this.Name = Name;
             BooksBorrowed = new List<string>();
         }
+
+        public virtual void BorrowBook(string bookTitle)
+        {
+            if (string.IsNullOrEmpty(bookTitle))
+            {
+                Console.WriteLine("Book title cannot be empty");
+                return;
+            }
+            if (!BooksBorrowed.Contains(bookTitle))
+            {
+                BooksBorrowed.Add(bookTitle);
+                Console.WriteLine($"Adding {bookTitle} to {Name} collection.");
+            }
+            else
+            {
+                Console.WriteLine($"{Name} already has book: {bookTitle}");
+            }
+        }
     }
 }
