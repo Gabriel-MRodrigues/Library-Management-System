@@ -32,6 +32,7 @@ namespace LMS_Project
                 switch (option)
                 {
                     case "1":
+                        AddNewMember(libraryMembers);
                         break;
                     case "2":
                         break;
@@ -57,8 +58,10 @@ namespace LMS_Project
             switch (option)
             {
                 case "1":
+                    AddStudent(libraryMembers);
                     break;
                 case "2":
+                    AddFacultyMember(libraryMembers);
                     break;
                 default:
                     Console.WriteLine("Invalid enter. Press enter to try again.");
