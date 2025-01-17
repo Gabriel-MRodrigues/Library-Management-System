@@ -20,5 +20,16 @@ namespace LMS_Project
         {
             Console.WriteLine($"{Name} is a {GradeLevel}");
         }
+        public override void BorrowBook(string bookTitle)
+        {
+            if (BooksBorrowed.Count <= 3)
+            {
+                base.BorrowBook(bookTitle);
+            }
+            else
+            {
+                Console.WriteLine($"{Name} as a Student cannot borrow more than 3 books.");
+            }
+        }
     }
 }
