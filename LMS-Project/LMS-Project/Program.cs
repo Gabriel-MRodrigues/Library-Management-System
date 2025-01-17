@@ -66,5 +66,71 @@ namespace LMS_Project
                     break;
             }
         }
+        static void AddStudent(List<LibraryMember> libraryMembers)
+        {
+            string name, gradeLevel;
+            int id;
+
+            Console.WriteLine("Enter Student Name: ");
+            name = Console.ReadLine();
+
+            id = ValidateMemberID(libraryMembers);
+
+            Console.WriteLine("Enter Student Grade Level: ");
+            gradeLevel = Console.ReadLine();
+
+            Student student = new Student(id, name, gradeLevel);
+            libraryMembers.Add(student);
+
+            Console.WriteLine("Student added. Press enter to return.");
+            Console.ReadLine();
+        }
+
+        static int ValidateMemberID(List<LibraryMember> libraryMembers)
+        {
+            int MemberID;
+            bool isValid = false;
+            while (!isValid)
+            {
+                Console.WriteLine("Enter Member ID:");
+                if (int.TryParse(Console.ReadLine(), out MemberID))
+                {
+                    if (!libraryMembers.Any(member => member.MemberID == MemberID))
+                    {
+                        isValid = true;
+                        return MemberID;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Member ID already exists. Try again...");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Member ID. Member ID must be only numbers. Try again...");
+                }
+            }
+            return -1;
+        }
+
+        static void AddFacultyMember(List<LibraryMember> libraryMembers)
+        {
+            string name, department;
+            int id;
+
+            Console.WriteLine("Enter Faculty Member Name: ");
+            name = Console.ReadLine();
+
+            id = ValidateMemberID(libraryMembers);
+
+            Console.WriteLine("Enter Faculty Member Department: ");
+            department = Console.ReadLine();
+
+            Faculty facultyMember = new Faculty(id, name, department);
+            libraryMembers.Add(facultyMember);
+
+            Console.WriteLine("Faculty Member added. Press enter to return.");
+            Console.ReadLine();
+        }
     }
 }
