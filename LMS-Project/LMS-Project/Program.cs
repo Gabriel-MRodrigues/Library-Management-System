@@ -140,11 +140,33 @@ namespace LMS_Project
         static void viewMember(List<LibraryMember> libraryMembers) 
         {
             Console.Clear();
+
             if (libraryMembers.Count != 0) 
             {
-                foreach (LibraryMember member in libraryMembers) 
+                Console.WriteLine("1. Faculty Members");
+                Console.WriteLine("2. Student Members");
+                Console.WriteLine("3. View all Members");
+
+                string option = Console.ReadLine();
+
+                switch (option)
                 {
-                    member.DisplayDetails();
+                    case "1":
+                        pathMember(option, libraryMembers);
+                        break;
+                    case "2":
+                        pathMember(option, libraryMembers);
+                        break;
+                    case "3":
+                        foreach (LibraryMember member in libraryMembers)
+                        {
+                            member.DisplayDetails();
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Invalid enter. Press enter to try again.");
+                        Console.ReadLine();
+                        break;
                 }
             }
             else
@@ -152,6 +174,42 @@ namespace LMS_Project
                 Console.WriteLine("Members not found...");
             }
             Console.WriteLine("Press enter to return to menu.");
+            Console.ReadLine();
+        }
+
+        static void pathMember(string option, List<LibraryMember> libraryMembers)
+        {
+            Console.Clear();
+            if(option == "1")
+            {
+                var faultyMembers = libraryMembers.OfType<Faculty>().ToList();
+                if (faultyMembers.Count != 0)
+                {
+                    foreach (var faulty in faultyMembers)
+                    {
+                        faulty.DisplayDetails();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Faculty members not found...");
+                }
+            }
+            else
+            {
+                var studentMembers = libraryMembers.OfType<Student>().ToList();
+                if(studentMembers.Count != 0)
+                {
+                    foreach (var student in studentMembers)
+                    {
+                        student.DisplayDetails();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Student members not found...");
+                }
+            }
             Console.ReadLine();
         }
     }

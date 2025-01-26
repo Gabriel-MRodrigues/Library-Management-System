@@ -56,16 +56,16 @@ namespace LMS_Project
             Console.WriteLine($"Member ID: {MemberID}");
             Console.WriteLine($"Name: {Name}");
             Console.WriteLine("Books Borrowed: ");
-            if (BooksBorrowed.Count == 0)
-            {
-                Console.WriteLine("None");
-            }
-            else
+            if (BooksBorrowed.Count != 0)
             {
                 foreach (string book in BooksBorrowed)
                 {
                     Console.WriteLine($"- {book}");
                 }
+            }
+            else
+            {
+                Console.WriteLine("None");
             }
         }
     }
