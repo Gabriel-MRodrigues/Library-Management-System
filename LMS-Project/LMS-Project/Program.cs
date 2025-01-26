@@ -37,6 +37,7 @@ namespace LMS_Project
                     case "2":
                         break;
                     case "3":
+                        viewMember(libraryMembers);
                         break;
                     case "4":
                         isRunning = false;
@@ -133,6 +134,24 @@ namespace LMS_Project
             libraryMembers.Add(facultyMember);
 
             Console.WriteLine("Faculty Member added. Press enter to return.");
+            Console.ReadLine();
+        }
+
+        static void viewMember(List<LibraryMember> libraryMembers) 
+        {
+            Console.Clear();
+            if (libraryMembers.Count != 0) 
+            {
+                foreach (LibraryMember member in libraryMembers) 
+                {
+                    member.DisplayDetails();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Members not found...");
+            }
+            Console.WriteLine("Press enter to return to menu.");
             Console.ReadLine();
         }
     }
