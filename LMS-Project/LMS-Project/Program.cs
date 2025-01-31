@@ -152,10 +152,10 @@ namespace LMS_Project
                 switch (option)
                 {
                     case "1":
-                        pathMember(option, libraryMembers);
+                        pathMember<Faculty>(libraryMembers);
                         break;
                     case "2":
-                        pathMember(option, libraryMembers);
+                        pathMember<Student>(libraryMembers);
                         break;
                     case "3":
                         foreach (LibraryMember member in libraryMembers)
@@ -177,38 +177,20 @@ namespace LMS_Project
             Console.ReadLine();
         }
 
-        static void pathMember(string option, List<LibraryMember> libraryMembers)
+        static void pathMember<option>(List<LibraryMember> libraryMembers) where option : LibraryMember
         {
             Console.Clear();
-            if(option == "1")
+            var members = libraryMembers.OfType<option>().ToList();
+            if(members.Count != 0)
             {
-                var faultyMembers = libraryMembers.OfType<Faculty>().ToList();
-                if (faultyMembers.Count != 0)
+                foreach (var member in members)
                 {
-                    foreach (var faulty in faultyMembers)
-                    {
-                        faulty.DisplayDetails();
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Faculty members not found...");
+                    member.DisplayDetails();
                 }
             }
             else
             {
-                var studentMembers = libraryMembers.OfType<Student>().ToList();
-                if(studentMembers.Count != 0)
-                {
-                    foreach (var student in studentMembers)
-                    {
-                        student.DisplayDetails();
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Student members not found...");
-                }
+                Console.WriteLine("Members not found...");
             }
             Console.ReadLine();
         }
