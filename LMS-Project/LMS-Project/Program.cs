@@ -145,7 +145,26 @@ namespace LMS_Project
             
             if(int.TryParse(Console.ReadLine(), out int memberID))
             {
-                identifyMember(memberID, libraryMembers);
+                LibraryMember member = identifyMember(memberID, libraryMembers);
+                if(member != null)
+                {
+                    Console.WriteLine("1.Borrow Book.");
+                    Console.WriteLine("2.Return Book.");
+                    string option = Console.ReadLine();
+
+                    switch (option)
+                    {
+                        case "1":
+                            borrowBook(member);
+                            break;
+                        case "2":
+                            break;
+                        default:
+                            Console.WriteLine("Invalid option. Press Enter to return...");
+                            Console.ReadLine();
+                            break;
+                    }
+                }
             }
             else
             {
@@ -154,20 +173,31 @@ namespace LMS_Project
             }
         }
 
-        static void identifyMember(int memberID, List<LibraryMember> libraryMembers) 
+        static LibraryMember identifyMember(int memberID, List<LibraryMember> libraryMembers) 
         {
             Console.Clear();
             LibraryMember member = libraryMembers.Find(m => m.MemberID == memberID);
             if (member != null)
             {
                 Console.WriteLine($"Member with ID of {memberID} succesfully found.");
-                Console.ReadLine();
+                return member;
             }
             else
             {
                 Console.WriteLine($"ID: {memberID} is not a member.");
                 Console.ReadLine();
             }
+            return null;
+        }
+
+        static void borrowBook(LibraryMember libraryMember)
+        {
+            Console.Clear();
+            Console.WriteLine("Insert book name: ");
+            string bookTitle = Console.ReadLine();
+
+            libraryMember.BorrowBook(bookTitle);
+            Console.ReadLine();
         }
 
         static void viewMember(List<LibraryMember> libraryMembers) 
