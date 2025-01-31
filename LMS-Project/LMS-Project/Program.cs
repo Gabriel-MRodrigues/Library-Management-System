@@ -158,6 +158,7 @@ namespace LMS_Project
                             borrowBook(member);
                             break;
                         case "2":
+                            returnBook(member);
                             break;
                         default:
                             Console.WriteLine("Invalid option. Press Enter to return...");
@@ -193,10 +194,20 @@ namespace LMS_Project
         static void borrowBook(LibraryMember libraryMember)
         {
             Console.Clear();
-            Console.WriteLine("Insert book name: ");
+            Console.WriteLine("Insert book title: ");
             string bookTitle = Console.ReadLine();
 
             libraryMember.BorrowBook(bookTitle);
+            Console.ReadLine();
+        }
+
+        static void returnBook(LibraryMember libraryMember)
+        {
+            Console.Clear();
+            Console.WriteLine("Insert book title to be returned: ");
+            string bookTitle = Console.ReadLine();
+
+            libraryMember.ReturnBook(bookTitle);
             Console.ReadLine();
         }
 
