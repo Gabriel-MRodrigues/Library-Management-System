@@ -35,6 +35,7 @@ namespace LMS_Project
                         AddNewMember(libraryMembers);
                         break;
                     case "2":
+                        borrowOrReturnBook(libraryMembers);
                         break;
                     case "3":
                         viewMember(libraryMembers);
@@ -135,6 +136,38 @@ namespace LMS_Project
 
             Console.WriteLine("Faculty Member added. Press enter to return.");
             Console.ReadLine();
+        }
+
+        static void borrowOrReturnBook(List<LibraryMember> libraryMembers)
+        {
+            Console.Clear();
+            Console.WriteLine("Insert Member ID:");
+            
+            if(int.TryParse(Console.ReadLine(), out int memberID))
+            {
+                identifyMember(memberID, libraryMembers);
+            }
+            else
+            {
+                Console.WriteLine("Invalid Member ID. Member ID must be only numbers...");
+                Console.ReadLine();
+            }
+        }
+
+        static void identifyMember(int memberID, List<LibraryMember> libraryMembers) 
+        {
+            Console.Clear();
+            LibraryMember member = libraryMembers.Find(m => m.MemberID == memberID);
+            if (member != null)
+            {
+                Console.WriteLine($"Member with ID of {memberID} succesfully found.");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine($"ID: {memberID} is not a member.");
+                Console.ReadLine();
+            }
         }
 
         static void viewMember(List<LibraryMember> libraryMembers) 
