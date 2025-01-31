@@ -67,6 +67,7 @@ namespace LMS_Project
             {
                 Console.WriteLine("None");
             }
+            Console.WriteLine(); //Breaking line
         }
     }
 }

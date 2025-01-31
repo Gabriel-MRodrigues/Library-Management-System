@@ -152,12 +152,15 @@ namespace LMS_Project
                 switch (option)
                 {
                     case "1":
-                        pathMember<Faculty>(libraryMembers);
+                        showTypeMember<Faculty>(libraryMembers);
                         break;
                     case "2":
-                        pathMember<Student>(libraryMembers);
+                        showTypeMember<Student>(libraryMembers);
                         break;
                     case "3":
+                        Console.Clear();
+                        Console.WriteLine("Displaying all Library Members...");
+                        Console.WriteLine();
                         foreach (LibraryMember member in libraryMembers)
                         {
                             member.DisplayDetails();
@@ -177,9 +180,11 @@ namespace LMS_Project
             Console.ReadLine();
         }
 
-        static void pathMember<option>(List<LibraryMember> libraryMembers) where option : LibraryMember
+        static void showTypeMember<option>(List<LibraryMember> libraryMembers) where option : LibraryMember
         {
             Console.Clear();
+            Console.WriteLine($"Displaying {typeof(option).Name} Members...");
+            Console.WriteLine();
             var members = libraryMembers.OfType<option>().ToList();
             if(members.Count != 0)
             {
@@ -190,7 +195,7 @@ namespace LMS_Project
             }
             else
             {
-                Console.WriteLine("Members not found...");
+                Console.WriteLine($"{typeof(option).Name} Members not found...");
             }
             Console.ReadLine();
         }
