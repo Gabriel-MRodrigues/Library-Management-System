@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -297,16 +298,38 @@ namespace LMS_Project
             switch (option) 
             {
                 case "1":
-                    BookManager.SearchBook(libraryBooks);
+                    filteredSearch(libraryBooks);
                     break;
                 case "2":
                     BookManager.AddBook(libraryBooks);
+                    Console.ReadLine();
                     break;
                 case "3":
                     BookManager.RemoveBook(libraryBooks);
+                    Console.ReadLine();
                     break;
                 case "4":
                     BookManager.ViewBookCatalog(libraryBooks);
+                    Console.ReadLine();
+                    break;
+            }
+        }
+
+        static void filteredSearch(List<Book> libraryBooks) 
+        {
+            Console.WriteLine("1. Search by Title or Author.");
+            Console.WriteLine("2. Search by ISBN");
+            string searchOption = Console.ReadLine();
+
+            switch (searchOption)
+            {
+                case "1":
+                    BookManager.SearchBook(libraryBooks);
+                    Console.ReadLine();
+                    break;
+                case "2":
+                    BookManager.SearchBookByISBN(libraryBooks);
+                    Console.ReadLine();
                     break;
             }
         }
