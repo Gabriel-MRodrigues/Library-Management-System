@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -64,14 +65,14 @@ namespace LMS_Project
         public static void SearchBook(List<Book> books)
         {
             Console.Clear();
-            Console.WriteLine("Enter book Title or Author or ISBN to search:");
+            Console.WriteLine("Enter book Title or Author to search:");
             string query = Console.ReadLine().ToLower();
 
-            var foundBooks = books.Where(b => query.Contains(b.Title.ToLower()) || query.Contains(b.Author.ToLower()) || query.Contains(b.ISBN.ToLower()));
+            var foundBooks = books.Where(b => b.Title.ToLower().Contains(query) || b.Author.ToLower().Contains(query)).ToList();
 
-            if(foundBooks.Count() == 0)
+            if(foundBooks.Count == 0)
             {
-                Console.WriteLine($"No matching books found for {query}.");
+                Console.WriteLine($"No matching books found.");
             }
             else
             {
@@ -80,6 +81,24 @@ namespace LMS_Project
                 {
                     book.DisplayBookDetails();
                 }
+            }
+        }
+
+        public static void SearchBookByISBN(List<Book> books)
+        {
+            Console.Clear();
+            Console.WriteLine("Enter ISBN to start searching: ");
+            string query = Console.ReadLine().Trim().ToLower();
+
+            var foundBook = books.FirstOrDefault(b => b.ISBN.ToLower() == query);
+
+            if(foundBook == null)
+            {
+                Console.WriteLine("No matching books found.");
+            }
+            else
+            {
+                Console.WriteLine($"-----------\n- {foundBook.Title} by {foundBook.Author}\n Description: {foundBook.Description}\n ISBN: {foundBook.ISBN}\n \t - {(foundBook.isAvailable ? "Is Available" : "Not Available")}");
             }
         }
 
@@ -137,12 +156,10 @@ namespace LMS_Project
                 }
                 Console.WriteLine("\n----- END OF CATALOG -----");
                 Console.WriteLine("Press enter to return...");
-                Console.ReadLine();
             }
             else
             {
                 Console.WriteLine("No books found");
-                Console.ReadLine();
             }
         }
     }
