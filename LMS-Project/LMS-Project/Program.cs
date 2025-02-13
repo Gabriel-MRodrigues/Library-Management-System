@@ -9,6 +9,8 @@ namespace LMS_Project
 {
     internal class Program
     {
+        
+
         static void Main(string[] args)
         {
             List<LibraryMember> libraryMembers = new List<LibraryMember>();
@@ -20,7 +22,7 @@ namespace LMS_Project
                 Console.WriteLine("\n1. Add New Member.");
                 Console.WriteLine("2. Borrow or Return Book.");
                 Console.WriteLine("3. View Member Details.");
-                Console.WriteLine("4. View Book Catalog.");
+                Console.WriteLine("4. Go to Library Catalog.");
                 Console.WriteLine("5. Exit\n");
                 Console.WriteLine("Press a number to take action.\n");
             }
@@ -45,7 +47,7 @@ namespace LMS_Project
                         viewMember(libraryMembers);
                         break;
                     case "4":
-                        viewBookCatalog(libraryBooks);
+                        goToLibraryCatalog(libraryBooks);
                         break;
                     case "5":
                         isRunning = false;
@@ -281,14 +283,31 @@ namespace LMS_Project
             Console.ReadLine();
         }
 
-        static void viewBookCatalog(List<Book> libraryBooks)
+        static void goToLibraryCatalog(List<Book> libraryBooks)
         {
             Console.Clear();
-            Console.WriteLine("Available Books:");
+            Console.WriteLine("1. Search for Book.");
+            Console.WriteLine("2. Add Book.");
+            Console.WriteLine("3. Remove Book.");
+            Console.WriteLine("4. View all Books.");
+            Console.WriteLine("Press a number to take action.\n");
 
-            foreach (var book in libraryBooks) 
+            string option = Console.ReadLine();
+
+            switch (option) 
             {
-                Console.WriteLine($"-----------\n- {book.Title} by {book.Author}\n Description: {book.Description}\n ISBN: {book.ISBN}\n \t - {(book.isAvailable ? "Is Available" : "Not Available")}");
+                case "1":
+                    BookManager.SearchBook(libraryBooks);
+                    break;
+                case "2":
+                    BookManager.AddBook(libraryBooks);
+                    break;
+                case "3":
+                    BookManager.RemoveBook(libraryBooks);
+                    break;
+                case "4":
+                    BookManager.ViewBookCatalog(libraryBooks);
+                    break;
             }
         }
     }
