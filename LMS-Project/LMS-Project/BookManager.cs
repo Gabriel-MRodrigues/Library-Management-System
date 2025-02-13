@@ -135,7 +135,7 @@ namespace LMS_Project
                 {
                     book.DisplayBookDetails();
                 }
-                Console.WriteLine("----- END OF CATALOG -----");
+                Console.WriteLine("\n----- END OF CATALOG -----");
                 Console.WriteLine("Press enter to return...");
                 Console.ReadLine();
             }
