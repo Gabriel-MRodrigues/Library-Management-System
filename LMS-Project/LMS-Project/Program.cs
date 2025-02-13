@@ -63,6 +63,7 @@ namespace LMS_Project
         }
         static void AddNewMember(List<LibraryMember> libraryMembers)
         {
+            Console.Clear();
             Console.WriteLine("1. Student Member");
             Console.WriteLine("2. Faculty Member");
             string option = Console.ReadLine();
@@ -83,6 +84,7 @@ namespace LMS_Project
         }
         static void AddStudent(List<LibraryMember> libraryMembers)
         {
+            Console.Clear();
             string name, gradeLevel;
             int id;
 
@@ -130,6 +132,7 @@ namespace LMS_Project
 
         static void AddFacultyMember(List<LibraryMember> libraryMembers)
         {
+            Console.Clear();
             string name, department;
             int id;
 
@@ -312,11 +315,16 @@ namespace LMS_Project
                     BookManager.ViewBookCatalog(libraryBooks);
                     Console.ReadLine();
                     break;
+                default:
+                    Console.WriteLine("Invalid Option");
+                    Console.ReadLine();
+                    break;
             }
         }
 
         static void filteredSearch(List<Book> libraryBooks) 
         {
+            Console.Clear();
             Console.WriteLine("1. Search by Title or Author.");
             Console.WriteLine("2. Search by ISBN");
             string searchOption = Console.ReadLine();
