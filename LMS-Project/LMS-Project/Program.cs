@@ -13,14 +13,15 @@ namespace LMS_Project
         {
             List<LibraryMember> libraryMembers = new List<LibraryMember>();
 
-            List<Book> libraryBooks = LoadBooks();
+            List<Book> libraryBooks = BookManager.LoadBooks();
 
             void askQuestions()
             {
                 Console.WriteLine("\n1. Add New Member.");
                 Console.WriteLine("2. Borrow or Return Book.");
-                Console.WriteLine("3. View Details.");
-                Console.WriteLine("4. Exit\n");
+                Console.WriteLine("3. View Member Details.");
+                Console.WriteLine("4. View Book Catalog.");
+                Console.WriteLine("5. Exit\n");
                 Console.WriteLine("Press a number to take action.\n");
             }
 
@@ -44,6 +45,9 @@ namespace LMS_Project
                         viewMember(libraryMembers);
                         break;
                     case "4":
+                        viewBookCatalog(libraryBooks);
+                        break;
+                    case "5":
                         isRunning = false;
                         Console.WriteLine("Exiting the program... press enter.");
                         Console.ReadLine();
@@ -277,45 +281,14 @@ namespace LMS_Project
             Console.ReadLine();
         }
 
-        public static List<Book> LoadBooks(string filePath)
+        static void viewBookCatalog(List<Book> libraryBooks)
         {
-            List<Book> books = new List<Book>();
+            Console.Clear();
+            Console.WriteLine("Available Books:");
 
-            StreamReader sr = new StreamReader(filePath);
-
-            try
+            foreach (var book in libraryBooks) 
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    books.Add(Book.FromString(line));
-                }
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("Books file not found. Creating a new one...");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error loading books: {ex.Message}");
-            }
-            return books;
-        }
-
-        public static void SaveBooks(string filePath, List<Book> books)
-        {
-            try
-            {
-                StreamWriter sw = new StreamWriter(filePath);
-
-                foreach (Book book in books)
-                {
-                    sw.WriteLine(book.ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error saving books: {ex.Message}");
+                Console.WriteLine($"-----------\n- {book.Title} by {book.Author}\n Description: {book.Description}\n ISBN: {book.ISBN}\n \t - {(book.isAvailable ? "Is Available" : "Not Available")}");
             }
         }
     }

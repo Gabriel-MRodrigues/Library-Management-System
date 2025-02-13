@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Book.cs" />
+    <Compile Include="BookManager.cs" />
     <Compile Include="Faculty.cs" />
     <Compile Include="LibraryMember.cs" />
     <Compile Include="Program.cs" />
