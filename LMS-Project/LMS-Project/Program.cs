@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace LMS_Project
         static void Main(string[] args)
         {
             List<LibraryMember> libraryMembers = new List<LibraryMember>();
+
+            List<Book> libraryBooks = LoadBooks();
 
             void askQuestions()
             {
@@ -272,6 +275,48 @@ namespace LMS_Project
                 Console.WriteLine($"{typeof(option).Name} Members not found...");
             }
             Console.ReadLine();
+        }
+
+        public static List<Book> LoadBooks(string filePath)
+        {
+            List<Book> books = new List<Book>();
+
+            StreamReader sr = new StreamReader(filePath);
+
+            try
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    books.Add(Book.FromString(line));
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("Books file not found. Creating a new one...");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading books: {ex.Message}");
+            }
+            return books;
+        }
+
+        public static void SaveBooks(string filePath, List<Book> books)
+        {
+            try
+            {
+                StreamWriter sw = new StreamWriter(filePath);
+
+                foreach (Book book in books)
+                {
+                    sw.WriteLine(book.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving books: {ex.Message}");
+            }
         }
     }
 }
