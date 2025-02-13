@@ -123,5 +123,27 @@ namespace LMS_Project
             SaveBooks(books);
             Console.WriteLine($"'{foundBook.Title}' has succesfully been removed from the Library");
         }
+
+        public static void ViewBookCatalog(List<Book> books)
+        {
+            Console.Clear();
+            Console.WriteLine("Available Books:");
+
+            if (books.Count > 0)
+            {
+                foreach (var book in books)
+                {
+                    book.DisplayBookDetails();
+                }
+                Console.WriteLine("----- END OF CATALOG -----");
+                Console.WriteLine("Press enter to return...");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("No books found");
+                Console.ReadLine();
+            }
+        }
     }
 }
